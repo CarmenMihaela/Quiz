@@ -72,7 +72,7 @@ h2:nth-of-type(2) {
     margin: 1.5vw 0;
 }
 
-.circle2 {
+.circle2, .circle4 {
     border-radius: 50%;
     background-color: white;
     padding: 0.5vw 1.3vw;
@@ -81,7 +81,7 @@ h2:nth-of-type(2) {
     position: relative;
 }
 
-.rectangle2 {
+.rectangle2, .rectangle4 {
     background-color: white;
     height: 3.5vw;
     width: 25vw;
@@ -140,6 +140,102 @@ p {
     text-align: center;
     margin: 2vw auto 0;
     width: 30%;
+}
+
+@media only screen and (max-width: 600px) {
+    * {
+        font-size: 6vw;
+    }
+    .container {
+        width: 80vw;
+        height: 50vh;
+        margin-top: 10vh;
+    }
+
+    .btn {
+        font-size: 10vw;
+        padding: 1vw;
+    }
+
+    #start, #restart {
+        margin: 35vh 37vw;
+    }
+
+    h1 {
+        font-size: 10vw;
+        padding: 0.5vw;
+    }
+
+    h2 {
+        font-size: 6vw;
+        margin-top: -2vw;
+    }
+
+    h2:nth-of-type(2) {
+        font-size: 8vw;
+        height: 4vh;
+        width:75vw;
+        margin-top: 2vw;
+        margin-bottom: 1vw;
+    }
+
+    .circle1{
+        padding: 0.4vw 4vw;
+        margin: 0vw -3vw 2vw 0vw;
+        border: 3vw solid #01937C;
+    }
+
+    .rectangle1 {
+        height: 5vh;
+        width: 63vw;
+        margin: 2vw 1vw 0vw 1vw;
+    }
+
+    .circle2, .circle4 {
+        padding: 0.5vw 3.3vw;
+        margin: -4vw 0vw 0vw 63vw;
+        border: 3vw solid #01937C;
+    }
+
+    .rectangle2, .rectangle4 {
+        height: 5vh;
+        width: 63vw;
+        margin: -1.5vw -75vw;
+    }
+
+    .circle3, .circle5 {
+        padding: 0.4vw 3.5vw;
+        margin: -2vw -3vw 2vw 0vw;
+        border: 3vw solid #01937C;
+    }
+
+    .rectangle3 {
+        height: 5vh;
+        width: 63vw;
+        margin: 0.5vw 1vw 0vw 1vw;
+    }
+
+    .circle5 {
+        padding: 0.4vw 3.5vw;
+        margin: -2vw -3vw 2vw 0vw;
+        border: 3vw solid #01937C;
+    }
+
+    .rectangle5 {
+        height: 5vh;
+        width: 63vw;
+        margin: 0.5vw 1vw 0vw 1vw;
+    }
+
+    #previous, #next {
+        font-size: 6vw;
+        margin-top: 5vw;
+    }
+
+    #previous {
+        margin-left:30vw;
+    }
+
 }
 
 

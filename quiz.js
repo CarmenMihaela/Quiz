@@ -4,99 +4,79 @@ let startButtonText = document.createTextNode("Start")
 let timesPlayed = 0
 let score
 let goodAnswer = 0
-let counter = 0
+let isClicked = {}
 
 
+function makeStartButton() {
+    startButton.appendChild(startButtonText)
+    startButton.setAttribute("id", "start")
+    initialDiv.appendChild(startButton)
+    startButton.classList.add('btn')
+}
 
-startButton.appendChild(startButtonText)
-startButton.setAttribute("id", "start")
+makeStartButton()
 
-initialDiv.appendChild(startButton)
-startButton.classList.add('btn')
 
-function buildGameLayout() {
+if (timesPlayed > 0) {
+    initialDiv.removeChild(score)
+}
+//making a container for all the game elements (question and answers)
+initialDiv.removeChild(startButton)
+let bigContainer = document.createElement('div')
+bigContainer.classList.add('container')
+initialDiv.appendChild(bigContainer)
+//making the title 
+let title = document.createElement('h1')
+title.style.backgroundColor = "transparent"
+let titleText = document.createTextNode("Math Problem")
+title.appendChild(titleText)
+bigContainer.appendChild(title)
+//making the question
+let subTitle = document.createElement('h2')
+bigContainer.appendChild(subTitle)
+let question = document.createElement('h2')
+bigContainer.appendChild(question)
 
-    clickedList = []
-    let isClicked = "no" //on-off switch so that once a choice is made, it cannot be changed or counted more than once
-    if (timesPlayed > 0) {
-        initialDiv.removeChild(score)
-    }
-    initialDiv.removeChild(startButton)
-    let bigContainer = document.createElement('div')
-    bigContainer.classList.add('container')
-    initialDiv.appendChild(bigContainer)
+function buildAnswers(index) {
+    let firstAnswerContainer, secondAnswerContainer, thirdAnswerContainer, fourthAnswerContainer, fifthAnswerContainer
+    let firstCircle, secondCircle, thirdCircle, fourthCircle, fifthCircle
+    let firstRectangle, secondRectangle, thirdRectangle, fourthRectangle, fifthRectangle
+    let firstCircleText, secondCircleText, thirdCircleText, fourthCircleText, fifthCircleText
 
-    let title = document.createElement('h1')
-    title.style.backgroundColor = "transparent"
-    let titleText = document.createTextNode("Math Problem")
-    title.appendChild(titleText)
-    bigContainer.appendChild(title)
+    let answerContainers = [firstAnswerContainer, secondAnswerContainer, thirdAnswerContainer, fourthAnswerContainer, fifthAnswerContainer]
+    let circles = [firstCircle, secondCircle, thirdCircle, fourthCircle, fifthCircle]
+    let circlesText = [firstCircleText, secondCircleText, thirdCircleText, fourthCircleText, fifthCircleText]
+    let rectangles = [firstRectangle, secondRectangle, thirdRectangle, fourthRectangle, fifthRectangle]
+    let className
+    let circleNumber
 
-    let subTitle = document.createElement('h2')
-    bigContainer.appendChild(subTitle)
-    let question = document.createElement('h2')
-    bigContainer.appendChild(question)
+    answerContainers[index] = document.createElement('div')
+    answerContainers[index].classList.add('answerContainer')
 
-    let firstAnswerContainer = document.createElement('div')
-    firstAnswerContainer.classList.add('answerContainer')
-    let firstCircle = document.createElement('div')
-    firstCircle.classList.add('circle1')
-    let firstCircleText = document.createTextNode("1")
-    firstCircle.appendChild(firstCircleText)
-    firstAnswerContainer.appendChild(firstCircle)
-    let firstRectangle = document.createElement('div')
-    firstRectangle.classList.add('rectangle1')
-    firstAnswerContainer.appendChild(firstRectangle)
-    bigContainer.appendChild(firstAnswerContainer)
+    circles[index] = document.createElement('div')
+    className = "circle" + index
+    circles[index].classList.add(className)
 
-    let secondAnswerContainer = document.createElement('div')
-    secondAnswerContainer.classList.add('answerContainer')
-    let secondRectangle = document.createElement('div')
+    circleNumber = index
+    circlesText[index] = document.createTextNode(circleNumber)
+    circles[index].appendChild(circlesText[index])
+    answerContainers[index].appendChild(circles[index])
 
-    secondRectangle.classList.add('rectangle2')
-    let secondCircle = document.createElement('div')
-    let secondCircleText = document.createTextNode("2")
-    secondCircle.appendChild(secondCircleText)
-    secondAnswerContainer.appendChild(secondCircle)
-    secondCircle.classList.add('circle2')
-    secondAnswerContainer.appendChild(secondRectangle)
-    bigContainer.appendChild(secondAnswerContainer)
+    rectangles[index] = document.createElement('div')
+    className = "rectangle" + index
+    rectangles[index].classList.add(className)
+    answerContainers[index].appendChild(rectangles[index])
 
-    let thirdAnswerContainer = document.createElement('div')
-    thirdAnswerContainer.classList.add('answerContainer')
-    let thirdCircle = document.createElement('div')
-    let thirdCircleText = document.createTextNode("3")
-    thirdCircle.appendChild(thirdCircleText)
-    thirdAnswerContainer.appendChild(thirdCircle)
-    thirdCircle.classList.add('circle3')
-    let thirdRectangle = document.createElement('div')
-    thirdAnswerContainer.appendChild(thirdRectangle)
-    thirdRectangle.classList.add('rectangle3')
-    bigContainer.appendChild(thirdAnswerContainer)
+    bigContainer.appendChild(answerContainers[index])
+}
 
-    let fourthAnswerContainer = document.createElement('div')
-    fourthAnswerContainer.classList.add('answerContainer')
-    let fourthCircle = document.createElement('div')
-    let fourthCircleText = document.createTextNode("4")
-    fourthCircle.appendChild(fourthCircleText)
-    fourthAnswerContainer.appendChild(fourthCircle)
-    let fourthRectangle = document.createElement('div')
-    fourthRectangle.classList.add('rectangle2')
-    fourthAnswerContainer.appendChild(fourthRectangle)
-    bigContainer.appendChild(fourthAnswerContainer)
-    fourthCircle.classList.add('circle2')
-    let fifthAnswerContainer = document.createElement('div')
-    fifthAnswerContainer.classList.add('answerContainer')
-    let fifthCircle = document.createElement('div')
-    let fifthCircleText = document.createTextNode("5")
-    fifthCircle.classList.add('circle5')
-    fifthCircle.appendChild(fifthCircleText)
-    fifthAnswerContainer.appendChild(fifthCircle)
-    let fifthRectangle = document.createElement('div')
-    fifthRectangle.classList.add('rectangle5')
-    fifthAnswerContainer.appendChild(fifthRectangle)
-    bigContainer.appendChild(fifthAnswerContainer)
+buildAnswers(1)
+buildAnswers(2)
+buildAnswers(3)
+buildAnswers(4)
+buildAnswers(5)
 
+function makePrevNextButtons() {
     let previousButton = document.createElement('button')
     let previousButtonText = document.createTextNode("previous")
     previousButton.appendChild(previousButtonText)
@@ -110,6 +90,24 @@ function buildGameLayout() {
     document.body.appendChild(nextButton)
     nextButton.classList.add('btn')
     nextButton.setAttribute("id", "next")
+}
+
+makePrevNextButtons()
+
+function fillInValues() {
+    let questionIndex = 1
+    let numberOfQuestions = Math.floor(Math.random() * 3) + 1 //the number of questions is between 1 and 10  Math.floor(Math.random() * 10)+1
+    subTitle.innerText = questionIndex + "/" + numberOfQuestions
+        question.innerHTML = "What is " + questions[0].firstNumber + " " + questions[0].operation + " " + questions[0].secondNumber
+
+}
+
+fillInValues()
+
+
+function buildGameLayout() {
+    let counterOfAnsweredQuestions = 0
+    let isClicked = "no" //on-off switch so that once a choice is made, it cannot be changed or counted more than once
 
     let questions = []
     let numberOfQuestions = Math.floor(Math.random() * 3) + 1 //the number of questions is between 1 and 10  Math.floor(Math.random() * 10)+1
@@ -153,16 +151,15 @@ function buildGameLayout() {
 
 
         let Question = {
-
-            firstNumber = firstNumber,
-            secondNumber = secondNumber,
-            operation = operation,
-            correctAnswer = correctAnswer,
-            firstAnswer = answers[0],
-            secondAnswer = answers[1],
-            thirdAnswer = answers[2],
-            fourthAnswer = answers[3],
-            fifthAnswer = answers[4]
+            firstNumber: firstNumber,
+            secondNumber: secondNumber,
+            operation: operation,
+            correctAnswer: correctAnswer,
+            firstAnswer: answers[0],
+            secondAnswer: answers[1],
+            thirdAnswer: answers[2],
+            fourthAnswer: answers[3],
+            fifthAnswer: answers[4]
         }
         questions.push(Question)
 
@@ -183,13 +180,13 @@ function buildGameLayout() {
                 fifthCircle.style.backgroundColor = 'green'
                 goodAnswer++
                 isClicked = "yes"
-                clickedList.push(isClicked)
+                counterOfAnsweredQuestions++
                 questions[0].fifthColor = window.getComputedStyle(fifthRectangle, null).getPropertyValue('background-color')
             } else {
                 event.currentTarget.style.backgroundColor = 'red'
                 fifthCircle.style.backgroundColor = 'red'
                 isClicked = "yes"
-                clickedList.push(isClicked)
+                counterOfAnsweredQuestions++
                 questions[0].fifthColor = window.getComputedStyle(fifthRectangle, null).getPropertyValue('background-color')
                 if (questions[0].firstAnswer == questions[0].correctAnswer) {
                     firstRectangle.style.backgroundColor = 'green'
@@ -225,14 +222,13 @@ function buildGameLayout() {
                 fourthCircle.style.backgroundColor = 'green'
                 goodAnswer++
                 isClicked = "yes"
-                clickedList.push(isClicked)
+                counterOfAnsweredQuestions++
                 questions[0].fourthColor = window.getComputedStyle(fourthRectangle, null).getPropertyValue('background-color')
             } else {
                 event.currentTarget.style.backgroundColor = 'red'
                 fourthCircle.style.backgroundColor = 'red'
                 isClicked = "yes"
-                clickedList.push(isClicked)
-                console.log(isClicked, clickedList)
+                counterOfAnsweredQuestions++
                 questions[0].fourthColor = window.getComputedStyle(fourthRectangle, null).getPropertyValue('background-color')
                 if (questions[0].firstAnswer == questions[0].correctAnswer) {
                     firstRectangle.style.backgroundColor = 'green'
@@ -269,13 +265,13 @@ function buildGameLayout() {
                 thirdCircle.style.backgroundColor = 'green'
                 goodAnswer++
                 isClicked = "yes"
-                clickedList.push(isClicked)
+                counterOfAnsweredQuestions++
                 questions[0].thirdColor = window.getComputedStyle(thirdRectangle, null).getPropertyValue('background-color')
             } else {
                 event.currentTarget.style.backgroundColor = 'red'
                 thirdCircle.style.backgroundColor = 'red'
                 isClicked = "yes"
-                clickedList.push(isClicked)
+                counterOfAnsweredQuestions++
                 questions[0].thirdColor = window.getComputedStyle(thirdRectangle, null).getPropertyValue('background-color')
                 if (questions[0].firstAnswer == questions[0].correctAnswer) {
                     firstRectangle.style.backgroundColor = 'green'
@@ -312,13 +308,13 @@ function buildGameLayout() {
                 secondCircle.style.backgroundColor = 'green'
                 goodAnswer++
                 isClicked = "yes"
-                clickedList.push(isClicked)
+                counterOfAnsweredQuestions++
                 questions[0].secondColor = window.getComputedStyle(secondRectangle, null).getPropertyValue('background-color')
             } else {
                 event.currentTarget.style.backgroundColor = 'red'
                 secondCircle.style.backgroundColor = 'red'
                 isClicked = "yes"
-                clickedList.push(isClicked)
+                counterOfAnsweredQuestions++
                 questions[0].secondColor = window.getComputedStyle(secondRectangle, null).getPropertyValue('background-color')
                 if (questions[0].firstAnswer == questions[0].correctAnswer) {
                     firstRectangle.style.backgroundColor = 'green'
@@ -355,13 +351,13 @@ function buildGameLayout() {
                 firstCircle.style.backgroundColor = 'green'
                 goodAnswer++
                 isClicked = "yes"
-                clickedList.push(isClicked)
+                counterOfAnsweredQuestions++
                 questions[0].firstColor = window.getComputedStyle(firstRectangle, null).getPropertyValue('background-color')
             } else {
                 event.currentTarget.style.backgroundColor = 'red'
                 firstCircle.style.backgroundColor = 'red'
                 isClicked = "yes"
-                clickedList.push(isClicked)
+                counterOfAnsweredQuestions++
                 questions[0].firstColor = window.getComputedStyle(firstRectangle, null).getPropertyValue('background-color')
                 if (questions[0].secondAnswer == questions[0].correctAnswer) {
                     secondRectangle.style.backgroundColor = 'green'
@@ -428,15 +424,15 @@ function buildGameLayout() {
                 if (isClicked == "no") {
                     if (event.currentTarget.innerText == questions[questionIndex - 1].correctAnswer) {
                         event.currentTarget.style.backgroundColor = 'green'
-                        circles[answerIndex-1].style.backgroundColor = 'green'
+                        circles[answerIndex - 1].style.backgroundColor = 'green'
                         goodAnswer++
                         isClicked = "yes"
                         counter++
                     } else {
                         event.currentTarget.style.backgroundColor = 'red'
-                        circles[answerIndex-1].style.backgroundColor = 'red'
+                        circles[answerIndex - 1].style.backgroundColor = 'red'
                         isClicked = "yes"
-                        clickedList.push(isClicked)
+                        counterOfAnsweredQuestions++
                         questions[questionIndex - 1].fifthColor = window.getComputedStyle(fifthRectangle, null).getPropertyValue('background-color')
                         if (questions[questionIndex - 1].firstAnswer == questions[questionIndex - 1].correctAnswer) {
                             firstRectangle.style.backgroundColor = 'green'
@@ -484,7 +480,7 @@ function buildGameLayout() {
 
 
 
-        } else if (clickedList.length == numberOfQuestions) {
+        } else if (counterOfAnsweredQuestions === numberOfQuestions) {
             initialDiv.removeChild(bigContainer)
             document.body.removeChild(previousButton)
             document.body.removeChild(nextButton)
