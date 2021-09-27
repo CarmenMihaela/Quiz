@@ -148,7 +148,7 @@ p {
     }
     .container {
         width: 80vw;
-        height: 50vh;
+        height: 60vh;
         margin-top: 10vh;
     }
 
@@ -158,7 +158,7 @@ p {
     }
 
     #start, #restart {
-        margin: 35vh 37vw;
+        margin: 25vh 37vw;
     }
 
     h1 {
@@ -172,11 +172,12 @@ p {
     }
 
     h2:nth-of-type(2) {
-        font-size: 8vw;
+        font-size: 6vw;
         height: 4vh;
         width:75vw;
         margin-top: 2vw;
         margin-bottom: 1vw;
+        padding: 0vw;
     }
 
     .circle1{
@@ -189,6 +190,7 @@ p {
         height: 5vh;
         width: 63vw;
         margin: 2vw 1vw 0vw 1vw;
+        padding-left: 5vw;
     }
 
     .circle2, .circle4 {
@@ -201,6 +203,7 @@ p {
         height: 5vh;
         width: 63vw;
         margin: -1.5vw -75vw;
+        padding-left: 5vw;
     }
 
     .circle3, .circle5 {
@@ -213,6 +216,7 @@ p {
         height: 5vh;
         width: 63vw;
         margin: 0.5vw 1vw 0vw 1vw;
+        padding-left: 5vw;
     }
 
     .circle5 {
@@ -225,6 +229,7 @@ p {
         height: 5vh;
         width: 63vw;
         margin: 0.5vw 1vw 0vw 1vw;
+        padding-left: 5vw;
     }
 
     #previous, #next {
@@ -234,6 +239,11 @@ p {
 
     #previous {
         margin-left:30vw;
+    }
+
+    p {
+        font-size: 8vw;
+        width: 90vw;
     }
 
 }
